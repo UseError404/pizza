@@ -14,7 +14,7 @@ function App() {
                         <div className="content__top">
                             <Categories
                                 funActive={(nameCategories) => console.log(nameCategories)}
-                                items={['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']}
+                                items={['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые', 'Новогодние']}
                             />
                             <div className="sort">
                                 <div className="sort__label">
