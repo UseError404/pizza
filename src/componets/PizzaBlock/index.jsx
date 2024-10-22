@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+ import React, {useState} from 'react';
 import classNames from "classnames";
 
-function Index({name, image, sizes, price, types}) {
+
+function PizzaBlock({name,imageUrl, sizes, price, types}) {
 
     const [activeSize, setActiveSize] = useState(sizes[0]);
     const availableSizes = [26,30,40];
@@ -18,7 +19,7 @@ function Index({name, image, sizes, price, types}) {
         <div className="pizza-block">
             <img
                 className="pizza-block__image"
-                src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
+                src={imageUrl}
                 alt="Pizza"
             />
             <h4 className="pizza-block__title">{name}</h4>
@@ -39,7 +40,7 @@ function Index({name, image, sizes, price, types}) {
                         className={classNames({
                             active : activeSize===index,
                             disabled: !sizes.includes(size),
-                        })}>{size} см</li>)}
+                        })}>{size} см.</li>)}
                 </ul>
             </div>
             <div className="pizza-block__bottom">
@@ -65,4 +66,6 @@ function Index({name, image, sizes, price, types}) {
     );
 }
 
-export default Index;
+
+
+export default PizzaBlock;

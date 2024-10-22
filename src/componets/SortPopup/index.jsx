@@ -4,7 +4,7 @@ function SortPopup({items}) {
     const [openSortPopup, setOpenSortPopup] = useState(false);
     const sortRef = useRef();
     const [activeSort, setActiveSort] = useState(0);
-    const activeItems = items[activeSort];
+    const activeItems = items[activeSort].name;
     //F изменение видимости sort popup
     const toggleVisiblePopup = () => {
         setOpenSortPopup(!openSortPopup)
@@ -52,11 +52,11 @@ function SortPopup({items}) {
             {openSortPopup &&
                 (<div className="sort__popup">
                     <ul>
-                        {items && items.map((name, index) => (
-                            <li key={`${name}_${index}`}
+                        {items && items.map((obj, index) => (
+                            <li key={`${obj.type}_${index}`}
                                 className={activeSort === index ? 'active' : ''}
                                 onClick={() => onActiveSort(index)}
-                            >{name}</li>
+                            >{obj.name}</li>
                         ))}
                     </ul>
                 </div>)
