@@ -1,7 +1,6 @@
  import React, {useState} from 'react';
 import classNames from "classnames";
 
-
 function PizzaBlock({name,imageUrl, sizes, price, types}) {
 
     const [activeSize, setActiveSize] = useState(sizes[0]);
@@ -12,9 +11,9 @@ function PizzaBlock({name,imageUrl, sizes, price, types}) {
 
     const [activeTypes, setActiveTypes] = useState(types[0])
     const availableTypes = ['тонкое', 'традиционное'];
-    const onSelectType = (index) => {
-        setActiveTypes(index)
-    };
+    const onSelectType = (index) => {setActiveTypes(index)};
+
+
     return (
         <div className="pizza-block">
             <img

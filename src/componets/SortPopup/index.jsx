@@ -1,15 +1,21 @@
 import React, {useEffect, useRef, useState} from 'react';
+import PropTypes from "prop-types";
+import Categories from "../Categories/index.jsx";
 
-const SortPopup = React.memo(function SortPopup({items}) {
+const SortPopup = React.memo(function SortPopup({items, activeSortType, onClickSortBy}) {
     const [openSortPopup, setOpenSortPopup] = useState(false);
     const sortRef = useRef();
-    const [activeSort, setActiveSort] = useState(0);
-    const activeItems = items[activeSort].name;
+    // const [activeSort, setActiveSort] = useState(0);
+    const activeItems = items.find(obj => obj.type === activeSortType).name
+
+
+    useEffect(() => {
+        document.body.addEventListener('click', handleOutsideClick);
+    }, []);
     //F изменение видимости sort popup
     const toggleVisiblePopup = () => {
         setOpenSortPopup(!openSortPopup)
     };
-
     //F проверка на вложенность элемента в указанном узле - sortRef
     const handleOutsideClick = (e) => {
         if (sortRef.current && !sortRef.current.contains(e.target)) {
@@ -17,12 +23,11 @@ const SortPopup = React.memo(function SortPopup({items}) {
         }
     }
 
-    useEffect(() => {
-        document.body.addEventListener('click', handleOutsideClick);
-    }, []);
 
-    const onActiveSort = (index) => {
-        setActiveSort(index);
+    const onActiveSort = (type) => {
+        if (onClickSortBy) {
+            onClickSortBy(type);
+        }
         setOpenSortPopup(false);
     }
 
@@ -54,8 +59,8 @@ const SortPopup = React.memo(function SortPopup({items}) {
                     <ul>
                         {items && items.map((obj, index) => (
                             <li key={`${obj.type}_${index}`}
-                                className={activeSort === index ? 'active' : ''}
-                                onClick={() => onActiveSort(index)}
+                                className={activeSortType === obj.type ? 'active' : ''}
+                                onClick={() => onActiveSort(obj.type)}
                             >{obj.name}</li>
                         ))}
                     </ul>
